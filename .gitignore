@@ -29,6 +29,7 @@ Temporary Items
 ### Gradle template
 .gradle
 /build/
+/target/
 
 # Ignore Gradle GUI config
 gradle-app.setting
