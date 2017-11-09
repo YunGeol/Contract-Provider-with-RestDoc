@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ProducerControllerTests.Config.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 @AutoConfigureJsonTesters
@@ -59,19 +59,5 @@ public class ProducerControllerTests {
         .andDo(MockMvcRestDocumentation.document("shouldGrantABeerIfOldEnough",
                                                  SpringCloudContractRestDocs.dslContract())
         );
-    }
-
-    @Configuration
-    @EnableAutoConfiguration
-    static class Config {
-        @Bean
-        PersonCheckingService personCheckingService() {
-            return person -> person.getAge() >= 20;
-        }
-
-        @Bean
-        ProducerController producerController(PersonCheckingService service) {
-            return new ProducerController(service);
-        }
     }
 }
